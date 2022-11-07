@@ -24,7 +24,13 @@ public class Thing {
 
     public void drawThing(){
         Main.app.fill(yellow1, yellow2, 0);
+        Main.app.noStroke();
         Main.app.circle(x, y, sizer);
+
+        Main.app.stroke(255);
+        Main.app.fill(255);
+        Main.app.textSize(20);
+        Main.app.text(INTEGER, x, y);
 
     }
 /*

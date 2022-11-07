@@ -4,11 +4,15 @@ import java.util.Arrays;
 
 public class Main extends PApplet{
     public static PApplet app;
-    final int s = 600;
-    final int arrsize = 100;
-    float methodSelect = random(1,4);
-    public Thing[] array;
-    final int key = 27;
+    final int s = 600; //used for size of screen
+    final int arrsize = 9; //how many objects
+    //float methodSelect = random(1,4);
+    public Thing[] mearray; //the array of objects
+    final int key = 6; //what we're looking for
+
+
+
+
 
 
     public static void main(String[] args){
@@ -23,33 +27,42 @@ public class Main extends PApplet{
         size(s, s);
     }
 
+    public void draw(){
+        background(30,129,176);
+
+        Main.app.stroke(255);
+        Main.app.fill(255);
+        Main.app.textSize(60);
+        Main.app.text(key, 300, 100);
+
+
+        for (Thing i : mearray){
+            i.drawThing();
+
+        }
+    }
+
     public void setup(){
-        array = new Thing[arrsize];
+        mearray = new Thing[arrsize];
 
         for (int i = 0; i < arrsize; i++){
 
-            int midX = 55 + (55 * i); //boxes are 5 apart and the 1 and 9 are 55 from sides
+            int midX = 55 + (60 * i); //boxes are 5 apart and the 1 and 9 are 55 from sides
             int midY = s/2;
             int rad = 50;
             int yell1 = (int)random(255); //for color
             int yell2 = (int) random(255); // for color
-            int A = (int)random(255); //for value
+            int A = (int)random(10); //for value
 
-            array[i] = new Thing(midX, midY, rad, yell1, yell2, A);
-            array[i].drawThing();
+            mearray[i] = new Thing(midX, midY, rad, yell1, yell2, A);
         }
-        array = sortArray(array);
+
+       mearray = sortArray(mearray);
+
 
 
         //int methodS = (int)methodSelect;
-        int returnVal;
-        returnVal = binarySearchWhile(array, key); //placeholder until I get other methods working (see commented out code below)
 
-        if (returnVal < 0) {
-            System.out.println("no :(");
-        } else {
-            System.out.println(returnVal);
-        }
 
         /*
         if (methodS == 1) {
@@ -63,12 +76,23 @@ public class Main extends PApplet{
 
     }
 
-    public void draw(){
-        background(30,129,176);
+
+
+
+    public void keyPressed(){
+
+
+        int returnVal;
+
+            returnVal = binarySearchWhile(mearray, key); //placeholder until I get other methods working (see commented out code below)
+
+            if (returnVal < 0) {
+                System.out.println("no :(");
+            } else {
+                System.out.println(returnVal);
+            }
+
     }
-
-
-
 
 
     public int binarySearchWhile(Thing[] arr, int key){
@@ -97,6 +121,9 @@ public class Main extends PApplet{
                     arr[j] = temp;
                 }
             }
+        }
+        for (Thing i : arr){
+            i.drawThing();
         }
         return arr;
     }
