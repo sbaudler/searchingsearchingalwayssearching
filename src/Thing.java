@@ -2,8 +2,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Thing {
-    final int x;
-    final int y;
+    public int x;
+    public int y;
     final int sizer;
     final int INTEGER;
     public int yellow1;

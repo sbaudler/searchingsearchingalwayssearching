@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17820af5-a7f5-463a-8f7a-853e43240e5b" name="Changes" comment="doesn't work but why not!">
+    <list default="true" id="17820af5-a7f5-463a-8f7a-853e43240e5b" name="Changes" comment="dlkjlkjljl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Thing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Thing.java" afterDir="false" />
@@ -65,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667519293069</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="doesn't work but why not!">
+      <created>1667806506683</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667806506684</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -82,5 +89,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="doesn't work but why not!" />
     <option name="LAST_COMMIT_MESSAGE" value="doesn't work but why not!" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/Thing.java</url>
+          <line>5</line>
+          <properties field="y" class="Thing" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

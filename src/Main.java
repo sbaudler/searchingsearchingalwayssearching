@@ -2,13 +2,19 @@ import processing.core.PApplet;
 
 import java.util.Arrays;
 
+import java.util.*;
+
 public class Main extends PApplet{
     public static PApplet app;
     final int s = 600; //used for size of screen
     final int arrsize = 9; //how many objects
     //float methodSelect = random(1,4);
-    public Thing[] mearray; //the array of objects
+    public ArrayList<Thing> mearray; //the array of objects
     final int key = 6; //what we're looking for
+
+    private int high;
+
+    private int low;
 
 
 
@@ -43,7 +49,7 @@ public class Main extends PApplet{
     }
 
     public void setup(){
-        mearray = new Thing[arrsize];
+        mearray = new ArrayList<>();
 
         for (int i = 0; i < arrsize; i++){
 
@@ -54,7 +60,8 @@ public class Main extends PApplet{
             int yell2 = (int) random(255); // for color
             int A = (int)random(10); //for value
 
-            mearray[i] = new Thing(midX, midY, rad, yell1, yell2, A);
+            mearray.add(i, new Thing(midX, midY, rad, yell1, yell2, A));
+
         }
 
        mearray = sortArray(mearray);
@@ -95,30 +102,71 @@ public class Main extends PApplet{
     }
 
 
-    public int binarySearchWhile(Thing[] arr, int key){
-        int low = 0;
-        int high = arr.length - 1;
-        while (low < high){
+    public int binarySearchWhile(ArrayList<Thing> arr, int key){
+
+        low = 0;
+        high = arr.size() - 1;
+
+        arr.get(low).yellow1 = 0; //change color to black of high and low!
+        arr.get(high).yellow1 = 0;
+
+        arr.get(low).yellow2 = 0;
+        arr.get(high).yellow2 = 0;
+
+        arr.get(low).drawThing();
+        arr.get(high).drawThing();
+
+        if (low < high){
             int mid = (low + high)/2;
-            int current = arr[mid].INTEGER;
+
+            arr.get(mid).yellow1 = 0;
+            arr.get(mid).yellow2 = 0;
+
+            arr.get(mid).drawThing();
+
+
+            int current = arr.get(mid).INTEGER;
             if (current == key){
                 return mid;
             } else if (current < key){
                 low = mid + 1;
+
+                for (int m = 0; m < low; m++){
+                    arr.get(m).yellow1 = 0;
+                    arr.get(m).yellow2 = 0;
+                    arr.get(m).drawThing();
+
+                }
             } else {
                 high = mid -1;
+
+                for (int c = arr.size() - 1; c > high; c--){
+                    arr.get(c).yellow1 = 0;
+                    arr.get(c).yellow2 = 0;
+                    arr.get(c).drawThing();
+                }
             }
         }
         return -1;
     }
 
-    public Thing[] sortArray(Thing[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[i].INTEGER < arr[j].INTEGER) {
-                    Thing temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+    public ArrayList<Thing> sortArray(ArrayList<Thing> arr) {
+        for (int i = 0; i < arr.size(); i++) {
+            for (int j = 0; j < arr.size(); j++) {
+                if (arr.get(i).INTEGER < arr.get(j).INTEGER) {
+                    Thing temp = arr.get(i);
+                    arr.set(i, arr.get(j));
+                    arr.set(j, temp);
+                    //arr.get(i) = arr.get(j);
+                    //arr.get(j) = temp;
+
+                    int tempX = arr.get(i).x;
+                    arr.get(i).x = arr.get(j).x;
+                    arr.get(j).x = tempX;
+
+                    int tempY = arr.get(i).y;
+                    arr.get(i).y = arr.get(j).y;
+                    arr.get(j).y = tempY;
                 }
             }
         }
