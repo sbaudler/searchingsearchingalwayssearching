@@ -10,11 +10,11 @@ public class Main extends PApplet{
     final int arrsize = 9; //how many objects
     //float methodSelect = random(1,4);
     public ArrayList<Thing> mearray; //the array of objects
-    final int key = 6; //what we're looking for
+    private int look; //what we're looking for
 
-    private int high;
+    private int high = arrsize - 1;
 
-    private int low;
+    private int low = 0;
 
 
 
@@ -36,11 +36,18 @@ public class Main extends PApplet{
     public void draw(){
         background(30,129,176);
 
-        Main.app.stroke(255);
-        Main.app.fill(255);
-        Main.app.textSize(60);
-        Main.app.text(key, 300, 100);
 
+        if (key > 0) {
+            Main.app.stroke(255);
+            Main.app.fill(255);
+            Main.app.textSize(60);
+            Main.app.text(key, 300, 100);
+        } else {
+            Main.app.stroke(255);
+            Main.app.fill(255);
+            Main.app.textSize(60);
+            Main.app.text("please enter value", 300, 100);
+        }
 
         for (Thing i : mearray){
             i.drawThing();
@@ -66,27 +73,19 @@ public class Main extends PApplet{
 
        mearray = sortArray(mearray);
 
+    }
 
+    public void keyPressed(){
+        look = key;
 
-        //int methodS = (int)methodSelect;
-
-
-        /*
-        if (methodS == 1) {
-            binarySearchFor();
-        } else if (methodS == 2){
-            returnVal = binarySearchWhile(array, key);
-        } else {
-            binarySearchRecursion();
-        }
-        */
+        System.out.println(key);
 
     }
 
 
 
 
-    public void keyPressed(){
+    public void mousePressed(){
 
 
         int returnVal;
@@ -95,6 +94,8 @@ public class Main extends PApplet{
 
             if (returnVal < 0) {
                 System.out.println("no :(");
+
+
             } else {
                 System.out.println(returnVal);
             }
@@ -102,53 +103,63 @@ public class Main extends PApplet{
     }
 
 
-    public int binarySearchWhile(ArrayList<Thing> arr, int key){
+    public int binarySearchWhile(ArrayList<Thing> arr, int look){
 
-        low = 0;
-        high = arr.size() - 1;
+            System.out.println("unadjusted" + look);
+            look = look - 48; //for some reason it adds 48 to look...i have no idea why but that's not my biggest issue rn
+            System.out.println("adjusted" + look);
 
-        arr.get(low).yellow1 = 0; //change color to black of high and low!
-        arr.get(high).yellow1 = 0;
+            low = 0;
+            high = arr.size() - 1;
 
-        arr.get(low).yellow2 = 0;
-        arr.get(high).yellow2 = 0;
+            arr.get(low).yellow1 = 0; //change color to black of high and low!
+            arr.get(high).yellow1 = 0;
 
-        arr.get(low).drawThing();
-        arr.get(high).drawThing();
+            arr.get(low).yellow2 = 0;
+            arr.get(high).yellow2 = 0;
 
-        if (low < high){
-            int mid = (low + high)/2;
+            arr.get(low).drawThing();
+            arr.get(high).drawThing();
 
-            arr.get(mid).yellow1 = 0;
-            arr.get(mid).yellow2 = 0;
+            if (low <= high) {
+                int mid = (low + high) / 2;
 
-            arr.get(mid).drawThing();
+                arr.get(mid).yellow1 = 0;
+                arr.get(mid).yellow2 = 0;
+
+                arr.get(mid).drawThing();
 
 
-            int current = arr.get(mid).INTEGER;
-            if (current == key){
-                return mid;
-            } else if (current < key){
-                low = mid + 1;
+                int current = arr.get(mid).INTEGER;
 
-                for (int m = 0; m < low; m++){
-                    arr.get(m).yellow1 = 0;
-                    arr.get(m).yellow2 = 0;
-                    arr.get(m).drawThing();
+                System.out.println("current" + current);
+                if (current == look) {
+                    return mid;
+                } else if (current < look) {
+                    low = mid + 1;
 
+                    for (int m = 0; m < low; m++) {
+                        arr.get(m).yellow1 = 0;
+                        arr.get(m).yellow2 = 0;
+                        arr.get(m).drawThing();
+
+                    }
+                } else {
+                    high = mid - 1;
+
+                    for (int c = arr.size() - 1; c > high; c--) {
+                        arr.get(c).yellow1 = 0;
+                        arr.get(c).yellow2 = 0;
+                        arr.get(c).drawThing();
+                    }
                 }
-            } else {
-                high = mid -1;
 
-                for (int c = arr.size() - 1; c > high; c--){
-                    arr.get(c).yellow1 = 0;
-                    arr.get(c).yellow2 = 0;
-                    arr.get(c).drawThing();
-                }
+
             }
+            return -1;
         }
-        return -1;
-    }
+
+
 
     public ArrayList<Thing> sortArray(ArrayList<Thing> arr) {
         for (int i = 0; i < arr.size(); i++) {
