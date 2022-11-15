@@ -80,6 +80,12 @@ public class Main extends PApplet{
 
         System.out.println(key);
 
+        if (key == 'r'){
+            low = 0;
+            high = arrsize - 1;
+            setup();
+        }
+
     }
 
 
@@ -105,14 +111,14 @@ public class Main extends PApplet{
 
     public int binarySearchWhile(ArrayList<Thing> arr, int look){
 
+        if (arr.size() > 0) {
+
             System.out.println("unadjusted" + look);
             look = look - 48; //for some reason it adds 48 to look...i have no idea why but that's not my biggest issue rn
             System.out.println("adjusted" + look);
 
-            low = 0;
-            high = arr.size() - 1;
 
-            arr.get(low).yellow1 = 0; //change color to black of high and low!
+            /*arr.get(low).yellow1 = 0; //change color to black of high and low!
             arr.get(high).yellow1 = 0;
 
             arr.get(low).yellow2 = 0;
@@ -120,6 +126,8 @@ public class Main extends PApplet{
 
             arr.get(low).drawThing();
             arr.get(high).drawThing();
+            */
+
 
             if (low <= high) {
                 int mid = (low + high) / 2;
@@ -127,7 +135,7 @@ public class Main extends PApplet{
                 arr.get(mid).yellow1 = 0;
                 arr.get(mid).yellow2 = 0;
 
-                arr.get(mid).drawThing();
+                //arr.get(mid).drawThing();
 
 
                 int current = arr.get(mid).INTEGER;
@@ -138,25 +146,49 @@ public class Main extends PApplet{
                 } else if (current < look) {
                     low = mid + 1;
 
-                    for (int m = 0; m < low; m++) {
+                   /* for (int m = 0; m <= low; m++) {
                         arr.get(m).yellow1 = 0;
                         arr.get(m).yellow2 = 0;
                         arr.get(m).drawThing();
+                   */
 
+                    ArrayList<Thing> arr2 = new ArrayList<Thing>();
+                    arr2.addAll(arr);
+                    for (int i = 0; i <= low; i++) {
+                        arr2.remove(0);
                     }
-                } else {
+                    //binarySearchWhile(arr2, look);
+
+
+                } else { //if curr > look
                     high = mid - 1;
 
-                    for (int c = arr.size() - 1; c > high; c--) {
+                    /*
+                    for (int c = arr.size() - 1; c >= high; c--) {
                         arr.get(c).yellow1 = 0;
                         arr.get(c).yellow2 = 0;
                         arr.get(c).drawThing();
                     }
+                    */
+
+
+                    ArrayList<Thing> arr2 = new ArrayList<Thing>();
+                    arr2.addAll(arr);
+                    for (int i = arr2.size() - 1; i >= high; i--) {
+                        arr2.remove(arr2.size() - 1);
+                    }
+
+                    //binarySearchWhile(arr2, look);
                 }
 
-
             }
+
+            // binarySearchWhile(arr, key);
             return -1;
+        } else {
+            return -1;
+        }
+
         }
 
 
